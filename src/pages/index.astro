@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+/* Frontmatter code runs on the server on every request */
+const renderedAt = new Date().toISOString();
+const userAgent = Astro.request.headers.get('user-agent') ?? '—';
+---
+
+<Layout title="Astro SSR">
+	<h1>Home</h1>
+	<p class="lead">This page is rendered on the server (SSR) on every request.</p>
+
+	<dl class="info">
+		<dt>Rendered at</dt>
+		<dd><code>{renderedAt}</code></dd>
+		<dt>Node.js</dt>
+		<dd><code>{process.version}</code></dd>
+		<dt>User-Agent</dt>
+		<dd><code>{userAgent}</code></dd>
+	</dl>
+
+	<p>
+		Refresh the page and the render time will change. API endpoint example:
+		<a href="/api/hello">/api/hello</a>.
+	</p>
+</Layout>
+
+<style>
+	h1 {
+		font-size: 1.75rem;
+		margin: 0 0 0.75rem;
+	}
+
+	.lead {
+		color: #4b5563;
+		line-height: 1.6;
+		margin-bottom: 1.5rem;
+	}
+
+	.info {
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		gap: 0.5rem 1rem;
+		margin: 0 0 1.5rem;
+	}
+
+	dt {
+		color: #6b7280;
+	}
+
+	dd {
+		margin: 0;
+		overflow-wrap: anywhere;
+	}
+
+	p {
+		color: #374151;
+		line-height: 1.6;
+	}
+
+	code {
+		background: #f3f4f6;
+		padding: 0.15rem 0.4rem;
+		border-radius: 0.25rem;
+		font-size: 0.9em;
+	}
+
+	a {
+		color: #2563eb;
+	}
+</style>
